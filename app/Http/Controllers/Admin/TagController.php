@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use App\Http\Requests\TagCreateRequest;
+use App\Http\Requests\TagUpdateRequest;
 
 class TagController extends Controller
 {
@@ -55,7 +56,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagCreateRequest $request)
     {
         //
         $tag = new Tag();
@@ -65,17 +66,6 @@ class TagController extends Controller
         $tag->save();
 
         return redirect('/admin/tag')->with('success', '标签「' . $tag->tag . '」创建成功.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -103,9 +93,17 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagUpdateRequest $request, $id)
     {
         //
+        $tag = Tag::findOrFail($id);
+        foreach (array_keys(array_except($this->fields, ['tag'])) as $field) {
+            $tag->$field = $request->get($field);
+        }
+        $tag->save();
+
+        return redirect("/admin/tag/$id/edit")
+            ->with('success', '修改已保存.');
     }
 
     /**
@@ -117,5 +115,10 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
+        $tag = Tag::findOrFail($id);
+        $tag->delete();
+
+        return redirect('/admin/tag')
+            ->with('success', '标签「' . $tag->tag . '」已经被删除.');
     }
 }
