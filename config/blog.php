@@ -2,13 +2,15 @@
 return [
     'name' => "Laravel 学习",
     'title' => "Laravel 学习",
-    'subtitle' => 'http://myblog.cc',
-    'description' => 'Laravel学院致力于提供优质Laravel中文学习资源',
+    'subtitle' => '在这里，记录你的美好',
+    'description' => 'Laravel个人博客学习项目',
     'author' => '博客',
     'page_image' => 'home-bg.jpg',
-    'posts_per_page' => 10,
+    'posts_per_page' => 5,
+    'rss_size' => 25,
     'uploads' => [
         'storage' => 'public',
-        'webpath' => '/storage/uploads',
+        'webpath' => '/storage',
     ],
+    'contact_email'=>env('MAIL_FROM'),
 ];

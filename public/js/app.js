@@ -52612,6 +52612,45 @@ module.exports = function(module) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/**
+ * Blog Javascript
+ * Copied from Clean Blog v1.0.0 (http://startbootstrap.com)
+ */
+// Navigation Scripts to Show Header on Scroll-Up
+
+
+jQuery(document).ready(function ($) {
+  var MQL = 1170; //primary navigation slide-in effect
+
+  if ($(window).width() > MQL) {
+    var headerHeight = $('.navbar-custom').height();
+    $(window).on('scroll', {
+      previousTop: 0
+    }, function () {
+      var currentTop = $(window).scrollTop(); //if user is scrolling up
+
+      if (currentTop < this.previousTop) {
+        if (currentTop > 0 && $('.navbar-custom').hasClass('is-fixed')) {
+          $('.navbar-custom').addClass('is-visible');
+        } else {
+          $('.navbar-custom').removeClass('is-visible is-fixed');
+        } //if scrolling down...
+
+      } else {
+        $('.navbar-custom').removeClass('is-visible');
+
+        if (currentTop > headerHeight && !$('.navbar-custom').hasClass('is-fixed')) {
+          $('.navbar-custom').addClass('is-fixed');
+        }
+      }
+
+      this.previousTop = currentTop;
+    });
+  } // Initialize tooltips
+
+
+  $('[data-toggle="tooltip"]').tooltip();
+});
 
 /***/ }),
 
@@ -52693,8 +52732,8 @@ if (token) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\phpstudy\phpstudy_pro\WWW\blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\phpstudy\phpstudy_pro\WWW\blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\phpstudy_pro\WWW\blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\phpstudy_pro\WWW\blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
